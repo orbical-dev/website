@@ -104,4 +104,4 @@ def submit_contact():
 
 if __name__ == '__main__':
     # For development
-    app.run(host='0.0.0.0', port=5010, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
