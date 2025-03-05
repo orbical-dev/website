@@ -1,0 +1,6 @@
+venv
+deploy
+deploy_config
+build
+dist
+__pycache__
