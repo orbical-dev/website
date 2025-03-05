@@ -1,4 +1,6 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request, redirect, flash, url_for
+import datetime
+import requests
 import os
 import sys
 
@@ -38,8 +40,68 @@ def contact():
 def projects():
     return render_template('projects.html')
 
+@app.route('/privacy/')
+def privacy():
+    return render_template('privacy.html')
 
+@app.route('/terms/')
+def terms():
+    return render_template('terms.html')
+
+# Cloudflare Turnstile configuration
+CF_TURNSTILE_SECRET_KEY = "0x4AAAAAAA_ke_to0umQvFHzyU09Og46uCg"
+CF_TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify"
+
+@app.route('/submit-contact', methods=['POST'])
+def submit_contact():
+    # Get form data
+    name = request.form.get('name', '')
+    email = request.form.get('email', '')
+    subject = request.form.get('subject', '')
+    message = request.form.get('message', '')
+    
+    # Get Turnstile token
+    cf_turnstile_response = request.form.get('cf-turnstile-response', '')
+    
+    # Verify Turnstile token
+    if not cf_turnstile_response:
+        return render_template('contact_error.html', error_message="Please complete the security check.")
+    
+    # Make verification request to Cloudflare
+    verification_data = {
+        'secret': CF_TURNSTILE_SECRET_KEY,
+        'response': cf_turnstile_response,
+        'remoteip': request.remote_addr
+    }
+    
+    try:
+        response = requests.post(CF_TURNSTILE_VERIFY_URL, data=verification_data)
+        result = response.json()
+        
+        if not result.get('success', False):
+            error_codes = result.get('error-codes', [])
+            print(f"Turnstile verification failed: {error_codes}")
+            return render_template('contact_error.html', error_message="Security check failed. Please try again.")
+    except Exception as e:
+        print(f"Error verifying Turnstile: {e}")
+        return render_template('contact_error.html', error_message="Error verifying security check. Please try again.")
+    
+    # Get current timestamp
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Format the contact information
+    contact_info = f"""\n{'='*50}\nTIMESTAMP: {timestamp}\nNAME: {name}\nEMAIL: {email}\nSUBJECT: {subject}\nMESSAGE:\n{message}\n{'='*50}\n"""
+    
+    # Save to contact.txt file
+    try:
+        contact_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'contact.txt')
+        with open(contact_file_path, 'a') as f:
+            f.write(contact_info)
+        return render_template('contact_success.html')
+    except Exception as e:
+        print(f"Error saving contact form: {e}")
+        return render_template('contact_error.html', error_message="There was an error saving your message. Please try again later.")
 
 if __name__ == '__main__':
     # For development
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5010, debug=True)

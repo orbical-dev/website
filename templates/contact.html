@@ -2,6 +2,8 @@
 {% block header %}
 <title>Contact - Orbical</title>
 <link rel="stylesheet" href="{{ url_for('send_static', path='css/contact.css') }}">
+<script src="{{ url_for('send_static', path='js/contact.js') }}" defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {% endblock %}
 
 {% block body %}
@@ -14,7 +16,7 @@
         
         <div class="contact-section">
             <h2 style="color: var(--color-tertiary); margin-bottom: var(--spacing-md); text-align: center; font-size: 1.8rem;">Send a Message</h2>
-            <form class="contact-form">
+            <form class="contact-form" action="/submit-contact" method="post">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -35,7 +37,11 @@
                     <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help you" required></textarea>
                 </div>
                 
-                <div style="text-align: center; margin-top: var(--spacing-sm);">
+                <div style="text-align: center; margin-top: var(--spacing-md);">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAA_ke2DgmRtJ4GIY" data-theme="dark"></div>
+                </div>
+                
+                <div style="text-align: center; margin-top: var(--spacing-md);">
                     <button type="submit" class="cta-button primary" style="min-width: 180px;">Send Message</button>
                 </div>
             </form>

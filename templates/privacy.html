@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block header %}
+<title>Privacy Policy - Orbical</title>
+<style>
+    .privacy-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+    }
+    
+    .privacy-section {
+        background: rgba(11, 15, 26, 0.7);
+        border-radius: var(--border-radius);
+        padding: var(--spacing-md) var(--spacing-lg);
+        margin: var(--spacing-md) 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+    
+    .privacy-section h2 {
+        color: var(--color-tertiary);
+        margin-bottom: var(--spacing-sm);
+        font-size: 1.8rem;
+    }
+    
+    .privacy-section h3 {
+        color: var(--color-tertiary);
+        margin: var(--spacing-md) 0 var(--spacing-sm);
+        font-size: 1.4rem;
+    }
+    
+    .privacy-section p, .privacy-section ul {
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .privacy-section ul {
+        padding-left: 2rem;
+    }
+    
+    .privacy-section li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .last-updated {
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: var(--spacing-md);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<main class="hero">
+    <div class="hero-content privacy-content">
+        <h1>
+            <span class="gradient-text">Privacy Policy</span>
+        </h1>
+        <p>This Privacy Policy describes how Orbical collects, uses, and shares your information.</p>
+        
+        <div class="privacy-section">
+            <h2>Introduction</h2>
+            <p>At Orbical, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+            
+            <h3>Information We Collect</h3>
+            <p>We collect only the following information:</p>
+            <ul>
+                <li><strong>Contact Form Responses:</strong> When you use our contact form, we collect your name, email address, and any other information you provide in your message. This information is used solely to respond to your inquiries.</li>
+            </ul>
+            
+            <h3>How We Use Your Information</h3>
+            <p>We use the information we collect only for the following limited purposes:</p>
+            <ul>
+                <li>To respond to your inquiries and provide customer support</li>
+                <li>To communicate with you regarding your requests</li>
+            </ul>
+            
+            <h3>Cookies and Tracking Technologies</h3>
+            <p>We do not use cookies or tracking technologies on our main site (orbical.dev). We do not collect analytics data or track your browsing behavior.</p>
+            
+            <h3>Data Sharing and Disclosure</h3>
+            <p>We do not sell your personal information to anyone. The information you provide through our contact form is used solely for the purpose of responding to your inquiries and is not shared with any third parties.</p>
+            <p>We only share your information in the following limited situation:</p>
+            <ul>
+                <li><strong>With Your Consent:</strong> We may disclose your personal information for any other purpose with your explicit consent.</li>
+            </ul>
+            
+            <h3>Data Security</h3>
+            <p>We implement appropriate technical and organizational measures to protect the security of your personal information. However, please be aware that no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+            
+            <h3>Your Data Protection Rights</h3>
+            <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+            <ul>
+                <li>The right to access, update, or delete your information</li>
+                <li>The right to rectification (to correct or update your information)</li>
+                <li>The right to object to the processing of your information</li>
+                <li>The right to restriction (to request that we restrict the processing of your information)</li>
+                <li>The right to data portability (to request a copy of your information in a structured format)</li>
+                <li>The right to withdraw consent</li>
+            </ul>
+            
+            <h3>Changes to This Privacy Policy</h3>
+            <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+            
+            <h3>Contact Us</h3>
+            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+            <ul>
+                <li>Email: <a href="mailto:support@orbical.dev">support@orbical.dev</a></li>
+            </ul>
+            
+            <p class="last-updated">Last Updated: March 5, 2025</p>
+        </div>
+        
+        <div class="cta-group">
+            <a href="/" class="cta-button secondary">Back to Home</a>
+        </div>
+    </div>
+</main>
+{% endblock %}

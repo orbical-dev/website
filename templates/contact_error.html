@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block header %}
+<title>Message Error - Orbical</title>
+<link rel="stylesheet" href="{{ url_for('send_static', path='css/contact.css') }}">
+<style>
+    .error-icon {
+        font-size: 4rem;
+        margin-bottom: var(--spacing-md);
+        color: #e74c3c;
+    }
+    
+    .error-message {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<main class="hero">
+    <div class="hero-content">
+        <div class="error-icon">!</div>
+        <h1>
+            <span class="gradient-text">Message Not Sent</span>
+        </h1>
+        <div class="error-message">
+            {% if error_message %}
+            <p>{{ error_message }}</p>
+            {% else %}
+            <p>We're sorry, but there was an error processing your message. Please try again later or contact us directly at <a href="mailto:support@orbical.dev">support@orbical.dev</a>.</p>
+            {% endif %}
+        </div>
+        
+        <div class="cta-group">
+            <a href="/" class="cta-button primary">Back to Home</a>
+            <a href="/contact/" class="cta-button secondary">Try Again</a>
+        </div>
+    </div>
+</main>
+{% endblock %}

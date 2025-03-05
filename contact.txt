@@ -1,0 +1,18 @@
+
+==================================================
+TIMESTAMP: 2025-03-05 02:30:12
+NAME: test
+EMAIL: zjones.092912@gmail.com
+SUBJECT: test
+MESSAGE:
+test
+==================================================
+
+==================================================
+TIMESTAMP: 2025-03-05 02:30:41
+NAME: blah
+EMAIL: foo@gmail.com
+SUBJECT: Lorum Ipsum
+MESSAGE:
+Skibti toilet will be mine
+==================================================
