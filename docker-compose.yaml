@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    image: orbical-website
+    container_name: orbical-website
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./contact.txt:/app/contact.txt
+    restart: unless-stopped
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=production

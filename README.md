@@ -1,72 +1,66 @@
 # Orbical Website
 
-A Flask-based website that can be compiled into a static binary for easy deployment on VPS servers.
+A Flask-based website that can be deployed using Docker for easy deployment on any server or cloud platform.
 
 ## Development
 
 To run the website in development mode:
 
 ```bash
-python launcher.py
+python app.py
 ```
 
 This will start the Flask development server on http://localhost:5000. The development server is not suitable for production use, but it's perfect for testing and debugging.
 
-## Building a Static Binary
+## Docker Deployment
 
-This project uses PyInstaller to create a standalone binary that includes all dependencies.
+This project can be easily deployed using Docker and Docker Compose.
 
-1. Install the required dependencies:
+### Local Development with Docker
+
+1. Build and start the Docker container:
    ```bash
-   pip install -r requirements.txt
+   docker-compose up --build
    ```
 
-2. Run the build script:
+2. Access the website at http://localhost:5000
+
+### Production Deployment
+
+#### Using Docker Compose
+
+1. Clone the repository on your server:
    ```bash
-   ./build_deploy.sh
+   git clone https://github.com/orbical-dev/orbical-website.git
+   cd orbical-website
    ```
 
-3. The binary and deployment files will be created in the `deploy` directory.
-
-## Deployment
-
-The build script creates a complete deployment package in the `deploy` directory. Follow the instructions in `deploy/README.md` to deploy the application to your VPS.
-
-### Quick Deployment Steps
-
-1. Copy the deployment package to your VPS:
+2. Start the application with Docker Compose:
    ```bash
-   rsync -avz --progress ./deploy/ user@your-vps:/tmp/orbical/
-   ```
-
-2. SSH into your VPS and install the application:
-   ```bash
-   sudo mkdir -p /opt/orbical
-   sudo cp -r /tmp/orbical/* /opt/orbical/
-   sudo chmod +x /opt/orbical/orbical
-   sudo cp /opt/orbical/systemd/orbical.service /etc/systemd/system/
-   sudo systemctl daemon-reload
-   sudo systemctl enable orbical
-   sudo systemctl start orbical
+   docker-compose up -d
    ```
 
 3. Set up a reverse proxy with Nginx (optional but recommended).
 
+#### Using GitHub Container Registry
+
+The Docker image is automatically built and published to GitHub Container Registry (ghcr.io) when changes are pushed to the main branch.
+
+1. Pull the latest image:
+   ```bash
+   docker pull ghcr.io/orbical-dev/orbical-website:latest
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -d -p 5000:5000 -v $(pwd)/contact.txt:/app/contact.txt ghcr.io/orbical-dev/orbical-website:latest
+   ```
+
 ## Configuration
 
-The application can be configured using the `config.ini` file. The following options are available:
+The application is configured to run on port 5000 by default. You can modify the port in the `app.py` file or by setting environment variables in the `docker-compose.yaml` file.
 
-```ini
-[server]
-port = 5000
-host = 0.0.0.0
-
-[production]
-use_production_server = false
-workers = 4
-```
-
-The `use_production_server` option is currently set to `false` to use the Flask development server. This is suitable for development and testing purposes.
+When using Docker, you can mount volumes to persist data, such as the contact form submissions stored in `contact.txt`.
 
 ## License
 
