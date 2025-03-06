@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+# Adding explicit permissions following the principle of least privilege
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
