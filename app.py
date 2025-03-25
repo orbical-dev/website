@@ -119,6 +119,4 @@ def submit_contact():
 if __name__ == '__main__':
     # For development
     is_dev = os.environ.get('FLASK_ENV') == 'development'
-    app.run(host='127.0.0.1' if not is_dev else '0.0.0.0',  # nosec B104 - Only binding to all interfaces in development mode
-            port=5000,
-            debug=is_dev)
+    app.run(host='0.0.0.0', port=5000)
