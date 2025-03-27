@@ -58,9 +58,7 @@ def terms():
     return render_template('terms.html')
 
 
-# Cloudflare Turnstile configuration
-CF_TURNSTILE_SECRET_KEY = os.environ.get('CF_TURNSTILE_SECRET_KEY', '')
-CF_TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify"
+# Cloudflare Turnstile configuration removed
 
 
 @app.route('/submit-contact', methods=['POST'])
@@ -71,31 +69,7 @@ def submit_contact():
     subject = request.form.get('subject', '')
     message = request.form.get('message', '')
 
-    # Get Turnstile token
-    cf_turnstile_response = request.form.get('cf-turnstile-response', '')
-
-    # Verify Turnstile token
-    if not cf_turnstile_response:
-        return render_template('contact_error.html', error_message="Please complete the security check.")
-
-    # Make verification request to Cloudflare
-    verification_data = {
-        'secret': CF_TURNSTILE_SECRET_KEY,
-        'response': cf_turnstile_response,
-        'remoteip': request.remote_addr
-    }
-
-    try:
-        response = requests.post(CF_TURNSTILE_VERIFY_URL, data=verification_data, timeout=10)
-        result = response.json()
-
-        if not result.get('success', False):
-            error_codes = result.get('error-codes', [])
-            print(f"Turnstile verification failed: {error_codes}")
-            return render_template('contact_error.html', error_message="Security check failed. Please try again.")
-    except Exception as e:
-        print(f"Error verifying Turnstile: {e}")
-        return render_template('contact_error.html', error_message="Error verifying security check. Please try again.")
+    # Turnstile verification removed
 
     # Get current timestamp
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
