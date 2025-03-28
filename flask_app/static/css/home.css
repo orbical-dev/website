@@ -1,0 +1,12 @@
+/* Home page specific styling */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+hr {
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+}
