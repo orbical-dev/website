@@ -11,7 +11,7 @@ COPY . .
 
 # Create contact.txt with appropriate permissions
 RUN touch contact.txt && chmod 666 contact.txt
-
+ENV FLASK_ENV=production
 # Expose port
 EXPOSE 5000
 
