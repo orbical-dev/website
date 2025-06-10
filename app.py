@@ -53,6 +53,10 @@ def privacy():
 def terms():
     return render_template('terms.html')
 
+@app.route('/health')
+def health_check():
+    return 'OK', 200
+
 
 # Cloudflare Turnstile configuration removed
 
